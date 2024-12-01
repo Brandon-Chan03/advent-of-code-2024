@@ -18,7 +18,7 @@ macro_rules! generate_day_match {
     ($number:expr, $($day:literal),*) => {
         match $number {
             $(
-                $day => match paste::paste! { [<day$day>]::[<day$day>]::read_input() } {
+                $day => match paste::paste! { [<day$day>]::[<day$day>]::part1() } {
                     Ok(result) => println!("The result for day {} is: {}", $day, result),
                     Err(e) => println!("ERROR on day {}: {}", $day, e),
                 },
@@ -28,8 +28,26 @@ macro_rules! generate_day_match {
     };
 }
 
-fn run_solution(number: i32) {
+macro_rules! generate_day_match2 {
+    ($number:expr, $($day:literal),*) => {
+        match $number {
+            $(
+                $day => match paste::paste! { [<day$day>]::[<day$day>]::part2() } {
+                    Ok(result) => println!("The result for day {} is: {}", $day, result),
+                    Err(e) => println!("ERROR on day {}: {}", $day, e),
+                },
+            )*
+            _ => println!("Solution for day {} is not implemented yet.", $number),
+        }
+    };
+}
+
+fn run_part1(number: i32) {
     generate_day_match!(number, 1);
+}
+
+fn run_part2(number: i32) {
+    generate_day_match2!(number, 1);
 }
 
 fn main() {
@@ -58,7 +76,8 @@ fn main() {
                         Ok(num) if num >= 1 && num <= 25 => {
                             number = num;
                             println!("Your number is {}", number);
-                            run_solution(number);
+                            run_part1(number);
+                            run_part2(number);
                             break;
                         }
                         _ => println!("Invalid input. Please enter a number between 1 and 25."),

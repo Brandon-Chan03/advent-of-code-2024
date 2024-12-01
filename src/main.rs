@@ -1,8 +1,10 @@
 use std::io::{self, Write};
 
 use utils::fetch;
+use solutions::*;
 
 mod utils;
+mod solutions;
 
 #[tokio::main]
 async fn run_fetch(year: i32, number: i32) {
@@ -10,7 +12,24 @@ async fn run_fetch(year: i32, number: i32) {
         Ok(_) => println!("Hello"),
         Err(e) => println!("ERROR: {}", e),
     }
+}
 
+macro_rules! generate_day_match {
+    ($number:expr, $($day:literal),*) => {
+        match $number {
+            $(
+                $day => match paste::paste! { [<day$day>]::[<day$day>]::read_input() } {
+                    Ok(result) => println!("The result for day {} is: {}", $day, result),
+                    Err(e) => println!("ERROR on day {}: {}", $day, e),
+                },
+            )*
+            _ => println!("Solution for day {} is not implemented yet.", $number),
+        }
+    };
+}
+
+fn run_solution(number: i32) {
+    generate_day_match!(number, 1);
 }
 
 fn main() {
@@ -39,6 +58,7 @@ fn main() {
                         Ok(num) if num >= 1 && num <= 25 => {
                             number = num;
                             println!("Your number is {}", number);
+                            run_solution(number);
                             break;
                         }
                         _ => println!("Invalid input. Please enter a number between 1 and 25."),

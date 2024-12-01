@@ -1,4 +1,4 @@
-use dotenv::dotenv;
+use dotenv;
 use std::env;
 
 use reqwest;

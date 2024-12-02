@@ -48,14 +48,14 @@ macro_rules! generate_day_match2 {
 // Comments here are just to calculate the time it takes to run the solution
 fn run_part1(number: i32) {
     // let start = Instant::now();
-    generate_day_match!(number, 1);
+    generate_day_match!(number, 1, 2);
     // let duration = start.elapsed();
     // println!("Time elapsed in part1 is: {:?}", duration);
 }
 
 fn run_part2(number: i32) {
     // let start = Instant::now();
-    generate_day_match2!(number, 1);
+    generate_day_match2!(number, 1, 2);
     // let duration = start.elapsed();
     // println!("Time elapsed in part2 is: {:?}", duration);
 }
